@@ -32,7 +32,6 @@ client/lib/
 
 # database
 *.postgres
-config/localPWD.js
 
 # ds
 .DS_Store

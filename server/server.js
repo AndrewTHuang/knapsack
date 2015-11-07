@@ -405,7 +405,7 @@ app.post("/api/collection/share", function(req, res) {
 
 //POST request to add about me section to existing user
 
-app.post("api/addAbout", function(req, res) {
+app.post("/api/addAbout", function(req, res) {
   console.log("in server addAbout");
   User.findOne({
     where: {
@@ -420,10 +420,28 @@ app.post("api/addAbout", function(req, res) {
   });
 });
 
+//POST request to add friends
+
+app.post("/api/addFriend", function(req, res) {
+  console.log("in server addFriend");
+  console.log('req sesh user: ', req.session.user)
+  User.findOne({
+    where: {
+      id: req.session.user.id
+    }
+  }).then(function(user) {
+    user.updateAttributes({
+      about_me: req.query.about
+    }).success(function() {
+      console.log("succesfully added about me to user")
+    });
+  });
+});
+
 
 //POST request to updat user_facts attributes
 
-app.post("api/addFacts", function(req, res) {
+app.post("/api/addFacts", function(req, res) {
   console.log("in server addFacts")
   User.findOne({
     where: {
@@ -443,7 +461,7 @@ app.post("api/addFacts", function(req, res) {
 
 //Send friend data back to front-end
 
-app.post("api/processFriend", function(req, res) {
+app.post("/api/processFriend", function(req, res) {
   console.log("in server processFriend")
   User.findOne({
     where: {

@@ -127,11 +127,24 @@ angular.module("knapsack.services", [])
       })
     }
 
+    var addFriend = function(user) {
+      console.log('in addFriend service')
+      console.log('user: ', user)
+      return $http({
+        method: 'POST',
+        url: 'api/addFriend',
+        params: {
+          id: user.id
+        }
+      })
+    }
+
     return {
       addAbout: addAbout,
       addFacts: addFacts,
       processFriend: processFriend,
-      loadUser: loadUser
+      loadUser: loadUser,
+      addFriend: addFriend
     }
   })
   .factory("Collections", ["$http", "snackbar", "Utils", function($http, snackbar, Utils) {
